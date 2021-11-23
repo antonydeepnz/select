@@ -31,6 +31,12 @@ export const Select: FC<IProp> = ({
     setShowDropDown(!showDropDown);
   };
 
+  const handleInputBlur = () => {
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  };
+
   return (
     <div className={cn('selectWrapper')}>
       <div
@@ -39,9 +45,11 @@ export const Select: FC<IProp> = ({
         })}
         onClick={handleInputClick}
         onFocus={handleInputClick}
+        onBlur={handleInputBlur}
       >
         <input
           ref={inputRef}
+          type="text"
           className={cn('selectInput', { selectInputWhite: white })}
           value={value}
         />
