@@ -19,8 +19,9 @@ interface IProp {
   white?: boolean;
   options: any[];
   popularOptions?: any[];
-  onClear?: () => void;
+  clearAll: boolean;
   showSelected?: boolean;
+  mainGroupTitle?: string;
   onChange?: (data: any) => void;
 }
 
@@ -31,7 +32,8 @@ export const Select: FC<IProp> = ({
   popularOptions,
   options,
   showSelected = false,
-  onClear,
+  clearAll,
+  mainGroupTitle = '',
   onChange,
 }) => {
   const [renders, setRenders] = useState<number>(0);
@@ -73,6 +75,10 @@ export const Select: FC<IProp> = ({
     [selectedItems]
   );
 
+  const handleClearAll = (): void => {
+    setSelectedItems([]);
+  };
+
   const displaiedValue = useMemo(
     () => selectedItems.map(({ name }) => name).join(', '),
     [selectedItems]
@@ -81,14 +87,16 @@ export const Select: FC<IProp> = ({
   console.log(renders, selectedItems);
 
   return (
-    <div className={cn('selectWrapper')}>
+    <div
+      className={cn('selectWrapper')}
+      onClick={handleInputClick}
+      onFocus={handleInputClick}
+      onBlur={handleInputBlur}
+    >
       <div
         className={cn('selectInputWrapper', {
           selectInputWrapperActive: showDropDown,
         })}
-        onClick={handleInputClick}
-        onFocus={handleInputClick}
-        onBlur={handleInputBlur}
       >
         <input
           ref={inputRef}
@@ -116,16 +124,17 @@ export const Select: FC<IProp> = ({
           selectDropDownListActive: showDropDown,
         })}
       >
-        {onClear && (
+        {clearAll && (
           <DropDownItem
             iconSrc="https://storage.yandexcloud.net/alfaleasing/components/cross-icon.svg"
             showIcon
             text="Любая"
+            onClick={handleClearAll}
           />
         )}
         {showSelected && selectedItems.length > 0 && (
           <DropDownGroup
-            groupTitle="Выбранные"
+            groupTitle="Выбранные модели"
             items={selectedItems}
             onItemClick={handleSelectItem}
             selected={selectedItems}
@@ -141,7 +150,7 @@ export const Select: FC<IProp> = ({
           />
         )}
         <DropDownGroup
-          groupTitle="Все"
+          groupTitle={mainGroupTitle || null}
           items={options}
           bottomBorder={true}
           onItemClick={handleSelectItem}

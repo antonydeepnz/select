@@ -49,7 +49,7 @@ const App = () => {
         options={arr}
         showSelected
         popularOptions={popular}
-        onClear={() => {}}
+        clearAll
         onChange={setValue}
       />
     </div>

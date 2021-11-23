@@ -37,30 +37,32 @@ export const DropDownItem: FC<IProps> = ({
         />
         <p className={cn('dropDownItemText')}>{text}</p>
         {additionalItems && (
-          <button className={cn('dropDownItemImageAdditional')} />
+          <button className={cn('dropDownItemAdditionalButton')} />
         )}
       </div>
-      {openedAdditional && (
-        <div className={cn('dropDownItemAdditionalWrapper')}>
-          {additionalItems &&
-            additionalItems.map(({ id, name }) => (
-              <div
-                key={id}
-                className={cn('dropDownItemAdditionalItem')}
-                onClick={() => handleAdditionalClick(id)}
+      <div className={cn('dropDownItemAdditionalWrapper')}>
+        {additionalItems &&
+          additionalItems.map(({ id, name }) => (
+            <div
+              key={id}
+              className={cn('dropDownItem')}
+              onClick={() => handleAdditionalClick(id)}
+            >
+              <img
+                alt=""
+                className={cn('dropDownItemImage', {
+                  dropDownItemImageSelected: showIcon,
+                })}
+                src={iconSrc}
+              />
+              <p
+                className={cn('dropDownItemText', 'dropDownItemTextAdditional')}
               >
-                <img
-                  alt=""
-                  className={cn('dropDownItemImage', {
-                    dropDownItemImageSelected: showIcon,
-                  })}
-                  src={iconSrc}
-                />
-                <p className={cn('dropDownItemText')}>{name}</p>
-              </div>
-            ))}
-        </div>
-      )}
+                {name}
+              </p>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };

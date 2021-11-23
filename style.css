@@ -129,7 +129,7 @@
   color: #0b1f35;
 }
 
-.dropDownItemImageAdditional {
+.dropDownItemAdditionalButton {
   position: absolute;
   top: 8px;
   right: 8px;
@@ -142,7 +142,7 @@
   background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon.svg');
 }
 
-.dropDownItemImageAdditional:hover {
+.dropDownItemAdditionalButton:hover {
   background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon-hover.svg');
 }
 
@@ -151,6 +151,6 @@
   flex-direction: column;
 }
 
-.dropDownItemAdditionalItem {
-  display: flex;
+.dropDownItemTextAdditional {
+  margin-left: 24px;
 }
