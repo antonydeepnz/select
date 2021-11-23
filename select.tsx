@@ -87,12 +87,7 @@ export const Select: FC<IProp> = ({
   console.log(renders, selectedItems);
 
   return (
-    <div
-      className={cn('selectWrapper')}
-      onClick={handleInputClick}
-      onFocus={handleInputClick}
-      onBlur={handleInputBlur}
-    >
+    <div className={cn('selectWrapper')}>
       <div
         className={cn('selectInputWrapper', {
           selectInputWrapperActive: showDropDown,
@@ -103,6 +98,9 @@ export const Select: FC<IProp> = ({
           type="text"
           className={cn('selectInput', { selectInputWhite: white })}
           value={displaiedValue}
+          onClick={handleInputClick}
+          onFocus={handleInputClick}
+          onBlur={handleInputBlur}
         />
         <p
           className={cn('selectCaption', {

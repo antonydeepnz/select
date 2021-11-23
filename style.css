@@ -20,7 +20,8 @@
   position: absolute;
   bottom: 7px;
   left: 12px;
-  height: 20px;
+  /* height: 20px; */
+  width: 100%;
   outline: none;
   border: none;
   background-color: transparent;
@@ -140,10 +141,19 @@
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon.svg');
+  z-index: 5;
 }
 
 .dropDownItemAdditionalButton:hover {
   background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon-hover.svg');
+}
+
+.dropDownItemAdditionalButtonActive {
+  background-image: url('https://storage.yandexcloud.net/alfaleasing/components/minus-icon.svg');
+}
+
+.dropDownItemAdditionalButtonActive:hover {
+  background-image: url('https://storage.yandexcloud.net/alfaleasing/components/minus-icon-hover.svg');
 }
 
 .dropDownItemAdditionalWrapper {

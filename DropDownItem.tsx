@@ -3,8 +3,9 @@ import cn from 'classnames';
 
 interface IProps {
   additionalItems?: any[];
+  id: string;
   iconSrc?: string;
-  showIcon: boolean;
+  checked: boolean;
   iconMode?: 'display' | 'selected';
   text: string;
   onClick?: () => void;
@@ -12,8 +13,9 @@ interface IProps {
 
 export const DropDownItem: FC<IProps> = ({
   additionalItems,
+  id,
   iconSrc = 'https://storage.yandexcloud.net/alfaleasing/components/dropdown-selected.svg',
-  showIcon,
+  checked,
   text,
   onClick = () => {},
 }) => {
@@ -21,9 +23,11 @@ export const DropDownItem: FC<IProps> = ({
 
   const handleAdditionalClick =
     (id: string) => (event: React.MouseEvent<HTMLElement>) => {
-      event.stopPropaganation();
+      // event.stopPropaganation();
       setOpenedAdditional([...openedAdditional, id]);
     };
+
+  const isOpened = openedAdditional.includes(id);
 
   return (
     <div className={cn('dropDownItemWrapper')}>
@@ -31,37 +35,49 @@ export const DropDownItem: FC<IProps> = ({
         <img
           alt=""
           className={cn('dropDownItemImage', {
-            dropDownItemImageSelected: showIcon,
+            dropDownItemImageSelected: checked,
           })}
           src={iconSrc}
         />
         <p className={cn('dropDownItemText')}>{text}</p>
         {additionalItems && (
-          <button className={cn('dropDownItemAdditionalButton')} />
+          <button
+            className={cn('dropDownItemAdditionalButton', {dropDownItemAdditionalButtonActive: isOpened})}
+            onClick={handleAdditionalClick(id)}
+          />
         )}
       </div>
       <div className={cn('dropDownItemAdditionalWrapper')}>
         {additionalItems &&
-          additionalItems.map(({ id, name }) => (
-            <div
-              key={id}
-              className={cn('dropDownItem')}
-              onClick={() => handleAdditionalClick(id)}
-            >
-              <img
-                alt=""
-                className={cn('dropDownItemImage', {
-                  dropDownItemImageSelected: showIcon,
-                })}
-                src={iconSrc}
-              />
-              <p
-                className={cn('dropDownItemText', 'dropDownItemTextAdditional')}
-              >
-                {name}
-              </p>
-            </div>
-          ))}
+          additionalItems.map(({ id: uid, name }) => {
+            return (
+              <React.Fragment>
+                {isOpened && (
+                  <div
+                    key={uid}
+                    className={cn('dropDownItem')}
+                    onClick={() => handleAdditionalClick(uid)}
+                  >
+                    <img
+                      alt=""
+                      className={cn('dropDownItemImage', {
+                        dropDownItemImageSelected: checked,
+                      })}
+                      src={iconSrc}
+                    />
+                    <p
+                      className={cn(
+                        'dropDownItemText',
+                        'dropDownItemTextAdditional'
+                      )}
+                    >
+                      {name}
+                    </p>
+                  </div>
+                )}
+              </React.Fragment>
+            );
+          })}
       </div>
     </div>
   );

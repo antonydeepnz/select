@@ -25,8 +25,9 @@ export const DropDownGroup: FC<IProp> = ({
         items.map(({ id, name, items }) => (
           <DropDownItem
             key={id}
+            id={id}
             additionalItems={items}
-            showIcon={selected.some(({ id: uid }) => uid === id)}
+            checked={selected.some(({ id: uid }) => uid === id)}
             text={name}
             onClick={onItemClick({ id, name })}
           />
