@@ -7,7 +7,7 @@ interface IProps {
   selected?: boolean;
   iconMode?: 'display' | 'selected';
   text: string;
-  onClick?: (id: string) => void;
+  onClick?: () => void;
 }
 
 export const DropDownItem: FC<IProps> = ({
@@ -20,7 +20,7 @@ export const DropDownItem: FC<IProps> = ({
   return (
     <div
       className={cn('dropDownItem', { dropDownItemSelected: selected })}
-      onClick={() => onClick(id)}
+      onClick={onClick}
     >
       <img alt="" className={cn('dropDownItemImage')} src={iconSrc} />
       <p className={cn('dropDownItemText')}>{text}</p>

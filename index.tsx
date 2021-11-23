@@ -32,6 +32,7 @@ const App = () => {
         showSelected
         popularOptions={popular}
         onClear={() => {}}
+        onChange={setValue}
       />
     </div>
   );

@@ -7,7 +7,7 @@ interface IProp {
   groupTitle?: string;
   items: any[];
   bottomBorder?: boolean;
-  onItemClick: (id: string) => void;
+  onItemClick: ({ id, name }) => () => void;
 }
 
 export const DropDownGroup: FC<IProp> = ({
@@ -26,7 +26,7 @@ export const DropDownGroup: FC<IProp> = ({
             id={id}
             selected={false}
             text={name}
-            onClick={onItemClick}
+            onClick={onItemClick({ id, name })}
           />
         ))}
     </div>

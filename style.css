@@ -110,7 +110,7 @@
 
 .dropDownItemImage {
   margin-right: 8px;
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 
 .dropDownItemSelected + .dropDownItemImage {

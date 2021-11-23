@@ -1,4 +1,11 @@
-import React, { FC, useState, useRef, useCallback } from 'react';
+import React, {
+  FC,
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 import cn from 'classnames';
 
 import { DropDownGroup } from './DropDownGroup';
@@ -14,6 +21,7 @@ interface IProp {
   popularOptions?: any[];
   onClear?: () => void;
   showSelected?: boolean;
+  onChange?: (data: any) => void;
 }
 
 export const Select: FC<IProp> = ({
@@ -24,11 +32,18 @@ export const Select: FC<IProp> = ({
   options,
   showSelected = false,
   onClear,
+  onChange,
 }) => {
+  const [renders, setRenders] = useState<number>(0);
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // useEffect(() => {
+  //   setRenders((prev) => prev + 1);
+  //   onChange(selectedItems);
+  // }, [selectedItems]);
 
   const handleInputClick = (): void => {
     if (inputRef.current) {
@@ -45,17 +60,21 @@ export const Select: FC<IProp> = ({
   };
 
   const handleSelectItem = useCallback(
-    (id: string): void => {
-      if (!selectedItems.includes(id)) {
-        setSelectedItems([...selectedItems, id]);
-      } else {
-        setSelectedItems([...selectedItems.filter((el) => id !== el)]);
-      }
-    },
+    ({ id, name }) =>
+      (): void => {
+        if (!selectedItems.includes(id)) {
+          setSelectedItems([...selectedItems, { id, name }]);
+        } else {
+          setSelectedItems([
+            ...selectedItems.filter(({ id: key }) => id !== key),
+          ]);
+        }
+      },
     [selectedItems]
   );
 
-  console.log(selectedItems);
+  const displaiedValue = useMemo(() => {}, []);
+  console.log(renders, selectedItems);
 
   return (
     <div className={cn('selectWrapper')}>
@@ -104,7 +123,6 @@ export const Select: FC<IProp> = ({
           <DropDownGroup
             groupTitle="Выбранные"
             items={selectedItems}
-            bottomBorder={true}
             onItemClick={handleSelectItem}
           />
         )}
