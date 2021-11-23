@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useCallback } from 'react';
 import cn from 'classnames';
 
 import { DropDownGroup } from './DropDownGroup';
@@ -13,6 +13,7 @@ interface IProp {
   options: any[];
   popularOptions?: any[];
   onClear?: () => void;
+  showSelected?: boolean;
 }
 
 export const Select: FC<IProp> = ({
@@ -21,24 +22,40 @@ export const Select: FC<IProp> = ({
   white = false,
   popularOptions,
   options,
+  showSelected = false,
   onClear,
 }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const [selectedItems, setSelectedItems] = useState([]);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleInputClick = () => {
+  const handleInputClick = (): void => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-    setShowDropDown(!showDropDown);
+    setShowDropDown((prev) => !prev);
   };
 
-  const handleInputBlur = () => {
+  const handleInputBlur = (): void => {
     if (inputRef.current) {
       inputRef.current.blur();
     }
-    setShowDropDown(false);
+    // setShowDropDown(false);
   };
+
+  const handleSelectItem = useCallback(
+    (id: string): void => {
+      if (!selectedItems.includes(id)) {
+        setSelectedItems([...selectedItems, id]);
+      } else {
+        setSelectedItems([...selectedItems.filter((el) => id !== el)]);
+      }
+    },
+    [selectedItems]
+  );
+
+  console.log(selectedItems);
 
   return (
     <div className={cn('selectWrapper')}>
@@ -83,14 +100,28 @@ export const Select: FC<IProp> = ({
             text="Любая"
           />
         )}
+        {showSelected && selectedItems.length > 0 && (
+          <DropDownGroup
+            groupTitle="Выбранные"
+            items={selectedItems}
+            bottomBorder={true}
+            onItemClick={handleSelectItem}
+          />
+        )}
         {popularOptions && (
           <DropDownGroup
             groupTitle="Популярные"
             items={popularOptions}
             bottomBorder={true}
+            onItemClick={handleSelectItem}
           />
         )}
-        <DropDownGroup groupTitle="Bmw" items={options} bottomBorder={true} />
+        <DropDownGroup
+          groupTitle="Все"
+          items={options}
+          bottomBorder={true}
+          onItemClick={handleSelectItem}
+        />
       </div>
     </div>
   );

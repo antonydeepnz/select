@@ -29,6 +29,7 @@ const App = () => {
         caption="Марка"
         value={value}
         options={arr}
+        showSelected
         popularOptions={popular}
         onClear={() => {}}
       />
