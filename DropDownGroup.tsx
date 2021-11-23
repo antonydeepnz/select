@@ -14,12 +14,11 @@ interface IProp {
 export const DropDownGroup: FC<IProp> = ({
   groupTitle = '',
   items,
-  bottomBorder = false,
   selected,
   onItemClick,
 }) => {
   return (
-    <div className={cn('dropDownGroup', { dropDownGroupBorder: bottomBorder })}>
+    <div className={cn('dropDownGroup')}>
       {groupTitle && <h4 className={cn('dropDownGroupTitle')}>{groupTitle}</h4>}
       {items &&
         items.map(({ id, name, items }) => (

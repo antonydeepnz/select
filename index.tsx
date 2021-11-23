@@ -50,6 +50,7 @@ const App = () => {
         showSelected
         popularOptions={popular}
         clearAll
+        groupSeparators
         onChange={setValue}
       />
     </div>

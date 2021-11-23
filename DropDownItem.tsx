@@ -3,10 +3,10 @@ import cn from 'classnames';
 
 interface IProps {
   additionalItems?: any[];
-  id: string;
+  id?: string;
   iconSrc?: string;
   showIcon?: boolean;
-  checked: boolean;
+  checked?: boolean;
   iconMode?: 'display' | 'selected';
   text: string;
   onClick?: () => void;

@@ -31,7 +31,8 @@
   background-color: transparent;
 }
 
-.selectInput:focus {
+.selectInput:focus,
+.selectInputActive {
   height: 20px;
 }
 
@@ -76,12 +77,20 @@
   border-radius: 8px;
 }
 
+.selectDropDownListSeparators > div:not(:last-child)::after {
+  content: '';
+  display: block;
+  height: 1px;
+  border-bottom: 1px solid #dbe1e7;
+}
+
 .selectDropDownListActive {
   display: block;
 }
 
 /* Group */
 .dropDownGroup {
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
 }
@@ -91,7 +100,7 @@
 }
 
 .dropDownGroupTitle {
-  margin-left: 8px;
+  margin: 0 0 0 8px;
   font-size: 16px;
   line-height: 22px;
   color: #6d7986;

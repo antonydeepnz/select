@@ -22,6 +22,7 @@ interface IProp {
   clearAll: boolean;
   showSelected?: boolean;
   mainGroupTitle?: string;
+  groupSeparators?: boolean;
   onChange?: (data: any) => void;
 }
 
@@ -34,6 +35,7 @@ export const Select: FC<IProp> = ({
   showSelected = false,
   clearAll,
   mainGroupTitle = '',
+  groupSeparators = false,
   onChange,
 }) => {
   const [renders, setRenders] = useState<number>(0);
@@ -80,11 +82,13 @@ export const Select: FC<IProp> = ({
   };
 
   const displaiedValue = useMemo(
-    () => selectedItems.map(({ name }) => name).join(', '),
+    () =>
+      selectedItems
+        .map(({ name }) => name)
+        .sort()
+        .join(', '),
     [selectedItems]
   );
-
-  console.log(renders, selectedItems);
 
   return (
     <div className={cn('selectWrapper')}>
@@ -100,7 +104,9 @@ export const Select: FC<IProp> = ({
         <input
           ref={inputRef}
           type="text"
-          className={cn('selectInput')}
+          className={cn('selectInput', {
+            selectInputActive: selectedItems.length > 0,
+          })}
           value={displaiedValue}
           onClick={handleInputClick}
           onFocus={handleInputClick}
@@ -122,9 +128,13 @@ export const Select: FC<IProp> = ({
         />
       </div>
       <div
-        className={cn('selectDropDownList', {
-          selectDropDownListActive: showDropDown,
-        })}
+        className={cn(
+          'selectDropDownList',
+          {
+            selectDropDownListActive: showDropDown,
+          },
+          { selectDropDownListSeparators: groupSeparators }
+        )}
       >
         {clearAll && (
           <DropDownItem
@@ -146,7 +156,6 @@ export const Select: FC<IProp> = ({
           <DropDownGroup
             groupTitle="Популярные"
             items={popularOptions}
-            bottomBorder={true}
             onItemClick={handleSelectItem}
             selected={selectedItems}
           />
@@ -154,7 +163,6 @@ export const Select: FC<IProp> = ({
         <DropDownGroup
           groupTitle={mainGroupTitle || null}
           items={options}
-          bottomBorder={true}
           onItemClick={handleSelectItem}
           selected={selectedItems}
         />
