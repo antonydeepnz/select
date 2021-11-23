@@ -93,7 +93,13 @@
 }
 
 /* Item */
+.dropDownItemWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .dropDownItem {
+  position: relative;
   height: 40px;
   margin: 4px;
   padding: 0 10px;
@@ -124,10 +130,27 @@
 }
 
 .dropDownItemImageAdditional {
+  position: absolute;
+  top: 8px;
+  right: 8px;
   height: 24px;
   width: 24px;
   border: none;
+  border-radius: 4px;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon.svg');
+}
+
+.dropDownItemImageAdditional:hover {
+  background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon-hover.svg');
+}
+
+.dropDownItemAdditionalWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropDownItemAdditionalItem {
+  display: flex;
 }

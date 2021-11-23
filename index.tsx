@@ -23,7 +23,15 @@ const arr = [
   { id: '4', name: '4 series' },
   { id: '5', name: '5 series' },
   { id: '6', name: '6 series' },
-  { id: '7', name: '7 series' },
+  {
+    id: '7',
+    name: '7 series',
+    items: [
+      { id: '715', name: '715' },
+      { id: '718', name: '718' },
+      { id: '720', name: '720' },
+    ],
+  },
 ];
 
 const popular = [
