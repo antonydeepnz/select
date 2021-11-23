@@ -16,11 +16,22 @@ const arr = [
   { id: '7', name: '7 series' },
 ];
 
+const popular = [
+  { id: '3', name: '3 series' },
+  { id: '4', name: '4 series' },
+];
+
 const App = () => {
   const [value, setValue] = useState(null);
   return (
     <div>
-      <Select caption="Марка" value={value} options={arr} onClear={() => {}} />
+      <Select
+        caption="Марка"
+        value={value}
+        options={arr}
+        popularOptions={popular}
+        onClear={() => {}}
+      />
     </div>
   );
 };

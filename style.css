@@ -53,6 +53,11 @@
   right: 15px;
   height: 15px;
   width: 15px;
+  transition: all 0.2s;
+}
+
+.selectArrowActive {
+  transform: rotateZ(180deg);
 }
 
 .selectDropDownList {

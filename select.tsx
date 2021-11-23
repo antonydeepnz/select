@@ -11,6 +11,7 @@ interface IProp {
   value: TValue<string> | null;
   white?: boolean;
   options: any[];
+  popularOptions?: any[];
   onClear?: () => void;
 }
 
@@ -18,6 +19,7 @@ export const Select: FC<IProp> = ({
   caption = '',
   value,
   white = false,
+  popularOptions,
   options,
   onClear,
 }) => {
@@ -35,6 +37,7 @@ export const Select: FC<IProp> = ({
     if (inputRef.current) {
       inputRef.current.blur();
     }
+    setShowDropDown(false);
   };
 
   return (
@@ -62,7 +65,9 @@ export const Select: FC<IProp> = ({
         </p>
         <img
           alt=""
-          className={cn('selectArrow')}
+          className={cn('selectArrow', {
+            selectArrowActive: showDropDown,
+          })}
           src="https://storage.yandexcloud.net/alfaleasing/components/dropdown-arrow.svg"
         />
       </div>
@@ -76,6 +81,13 @@ export const Select: FC<IProp> = ({
             iconSrc="https://storage.yandexcloud.net/alfaleasing/components/cross-icon.svg"
             selected={true}
             text="Любая"
+          />
+        )}
+        {popularOptions && (
+          <DropDownGroup
+            groupTitle="Популярные"
+            items={popularOptions}
+            bottomBorder={true}
           />
         )}
         <DropDownGroup groupTitle="Bmw" items={options} bottomBorder={true} />
