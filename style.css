@@ -31,7 +31,7 @@
 .selectDropDownList {
   position: absolute;
   display: none;
-  top: 100%;
+  top: calc(100% + 4px);
   width: 100%;
   background-color: #fff;
   z-index: 99;
@@ -62,8 +62,10 @@
 
 /* Item */
 .dropDownItem {
-  display: flex;
+  height: 40px;
   margin: 4px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
   border-radius: 4px;
 }
@@ -74,7 +76,7 @@
 
 .dropDownItemImage {
   margin-right: 8px;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .dropDownItemSelected + .dropDownItemImage {

@@ -3,14 +3,16 @@ import cn from 'classnames';
 
 interface IProps {
   iconSrc?: string;
-  selected: boolean;
+  selected?: boolean;
   text: string;
+  onClick?: () => void;
 }
 
 export const DropDownItem: FC<IProps> = ({
   iconSrc = 'https://storage.yandexcloud.net/alfaleasing/components/dropdown-selected.svg',
-  selected,
+  selected = false,
   text,
+  onClick,
 }) => {
   return (
     <div className={cn('dropDownItem', { dropDownItemSelected: selected })}>

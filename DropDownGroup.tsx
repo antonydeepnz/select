@@ -19,7 +19,7 @@ export const DropDownGroup: FC<IProp> = ({
       {groupTitle && <h4 className={cn('dropDownGroupTitle')}>{groupTitle}</h4>}
       {items &&
         items.map(({ id, name }) => (
-          <DropDownItem key={id} selected={false} text={name} />
+          <DropDownItem key={id} selected={false} text={name}/>
         ))}
     </div>
   );
