@@ -62,7 +62,7 @@ export const Select: FC<IProp> = ({
   const handleSelectItem = useCallback(
     ({ id, name }) =>
       (): void => {
-        if (!selectedItems.includes(id)) {
+        if (!selectedItems.some(({ id: uid }) => uid === id)) {
           setSelectedItems([...selectedItems, { id, name }]);
         } else {
           setSelectedItems([
@@ -73,7 +73,11 @@ export const Select: FC<IProp> = ({
     [selectedItems]
   );
 
-  const displaiedValue = useMemo(() => {}, []);
+  const displaiedValue = useMemo(
+    () => selectedItems.map(({ name }) => name).join(', '),
+    [selectedItems]
+  );
+
   console.log(renders, selectedItems);
 
   return (
@@ -90,7 +94,7 @@ export const Select: FC<IProp> = ({
           ref={inputRef}
           type="text"
           className={cn('selectInput', { selectInputWhite: white })}
-          value={value}
+          value={displaiedValue}
         />
         <p
           className={cn('selectCaption', {

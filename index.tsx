@@ -27,7 +27,7 @@ const App = () => {
     <div>
       <Select
         caption="Марка"
-        value={value}
+        value={null}
         options={arr}
         showSelected
         popularOptions={popular}
