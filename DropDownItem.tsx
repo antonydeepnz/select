@@ -5,6 +5,7 @@ interface IProps {
   additionalItems?: any[];
   id: string;
   iconSrc?: string;
+  showIcon?: boolean;
   checked: boolean;
   iconMode?: 'display' | 'selected';
   text: string;
@@ -17,17 +18,24 @@ export const DropDownItem: FC<IProps> = ({
   iconSrc = 'https://storage.yandexcloud.net/alfaleasing/components/dropdown-selected.svg',
   checked,
   text,
+  showIcon,
   onClick = () => {},
 }) => {
   const [openedAdditional, setOpenedAdditional] = useState<string[]>([]);
 
+  const isOpened = openedAdditional.includes(id);
+
   const handleAdditionalClick =
     (id: string) => (event: React.MouseEvent<HTMLElement>) => {
       // event.stopPropaganation();
-      setOpenedAdditional([...openedAdditional, id]);
-    };
+      if (!isOpened) {
+        setOpenedAdditional([...openedAdditional, id]);
+      }
 
-  const isOpened = openedAdditional.includes(id);
+      if (isOpened) {
+        setOpenedAdditional([...openedAdditional.filter((el) => el !== id)]);
+      }
+    };
 
   return (
     <div className={cn('dropDownItemWrapper')}>
@@ -35,14 +43,16 @@ export const DropDownItem: FC<IProps> = ({
         <img
           alt=""
           className={cn('dropDownItemImage', {
-            dropDownItemImageSelected: checked,
+            dropDownItemImageSelected: checked || showIcon,
           })}
           src={iconSrc}
         />
         <p className={cn('dropDownItemText')}>{text}</p>
         {additionalItems && (
           <button
-            className={cn('dropDownItemAdditionalButton', {dropDownItemAdditionalButtonActive: isOpened})}
+            className={cn('dropDownItemAdditionalButton', {
+              dropDownItemAdditionalButtonActive: isOpened,
+            })}
             onClick={handleAdditionalClick(id)}
           />
         )}
