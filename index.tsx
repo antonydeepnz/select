@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import { Select } from './select';
 import './style.css';
@@ -8,21 +8,21 @@ interface AppState {
   name: string;
 }
 
-class App extends Component<AppProps, AppState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'React',
-    };
-  }
+const arr = [
+  { id: '3', name: '3 series' },
+  { id: '4', name: '4 series' },
+  { id: '5', name: '5 series' },
+  { id: '6', name: '6 series' },
+  { id: '7', name: '7 series' },
+];
 
-  render() {
-    return (
-      <div>
-        <Select />
-      </div>
-    );
-  }
-}
+const App = () => {
+  const [value, setValue] = useState(null);
+  return (
+    <div>
+      <Select value={value} options={arr} />
+    </div>
+  );
+};
 
 render(<App />, document.getElementById('root'));

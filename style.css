@@ -9,8 +9,80 @@
   border: none;
   border-radius: 5px 5px 0 0;
   border-bottom: 1px solid rgba(11, 31, 53, 0.15);
-  background: rgba(11, 31, 53, 0.05);
+  background-color: rgba(11, 31, 53, 0.05);
+}
+
+.selectInputActive {
+  border-bottom: 2px solid #0b1f35;
 }
 
 .selectInputWhite {
+  background-color: #fff;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 24px;
+  right: 15px;
+  height: 15px;
+  width: 15px;
+}
+
+.selectDropDownList {
+  position: absolute;
+  display: none;
+  top: 100%;
+  width: 100%;
+  background-color: #fff;
+  z-index: 99;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08), 0px 8px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+.selectDropDownListActive {
+  display: block;
+}
+
+/* Group */
+.dropDownGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropDownGroupBorder {
+  border-bottom: 1px solid #dbe1e7;
+}
+
+.dropDownGroupTitle {
+  margin-left: 8px;
+  font-size: 16px;
+  line-height: 22px;
+  color: #6d7986;
+}
+
+/* Item */
+.dropDownItem {
+  display: flex;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.dropDownItem:hover {
+  background: #f1f3f5;
+}
+
+.dropDownItemImage {
+  margin-right: 8px;
+  visibility: hidden;
+}
+
+.dropDownItemSelected + .dropDownItemImage {
+  visibility: visible;
+}
+
+.dropDownItemText {
+  font-size: 16px;
+  line-height: 22px;
+  color: #0b1f35;
 }
