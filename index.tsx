@@ -20,7 +20,7 @@ const App = () => {
   const [value, setValue] = useState(null);
   return (
     <div>
-      <Select value={value} options={arr} onClear={() => {}} />
+      <Select caption="Марка" value={value} options={arr} onClear={() => {}} />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import cn from 'classnames';
 interface IProps {
   iconSrc?: string;
   selected?: boolean;
+  iconMode?: 'display' | 'selected';
   text: string;
   onClick?: () => void;
 }

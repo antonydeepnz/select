@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useRef } from 'react';
 import cn from 'classnames';
 
 import { DropDownGroup } from './DropDownGroup';
@@ -7,43 +7,57 @@ import { DropDownItem } from './DropDownItem';
 type TValue<T> = T | T[];
 
 interface IProp {
+  caption?: string;
   value: TValue<string> | null;
   white?: boolean;
   options: any[];
   onClear?: () => void;
 }
 
-// https://storage.yandexcloud.net/alfaleasing/components/delete-icon.svg
-
 export const Select: FC<IProp> = ({
+  caption = '',
   value,
   white = false,
   options,
   onClear,
 }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInputClick = () => {
-    setShowDropDown(true);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+    setShowDropDown(!showDropDown);
   };
 
   return (
     <div className={cn('selectWrapper')}>
-      <input
-        className={cn(
-          'selectInput',
-          { selectInputWhite: white },
-          { selectInputActive: showDropDown }
-        )}
-        value={value}
+      <div
+        className={cn('selectInputWrapper', {
+          selectInputWrapperActive: showDropDown,
+        })}
         onClick={handleInputClick}
         onFocus={handleInputClick}
-      />
-      <img
-        alt=""
-        className={cn('selectArrow')}
-        src="https://storage.yandexcloud.net/alfaleasing/components/dropdown-arrow.svg"
-      />
+      >
+        <input
+          ref={inputRef}
+          className={cn('selectInput', { selectInputWhite: white })}
+          value={value}
+        />
+        <p
+          className={cn('selectCaption', {
+            selectCaptionActive: showDropDown || value,
+          })}
+        >
+          {caption}
+        </p>
+        <img
+          alt=""
+          className={cn('selectArrow')}
+          src="https://storage.yandexcloud.net/alfaleasing/components/dropdown-arrow.svg"
+        />
+      </div>
       <div
         className={cn('selectDropDownList', {
           selectDropDownListActive: showDropDown,
