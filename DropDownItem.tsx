@@ -28,7 +28,6 @@ export const DropDownItem: FC<IProps> = ({
   const handleAdditionalClick =
     (id: string) => (event: React.MouseEvent<HTMLElement>) => {
       event.stopPropagation();
-      event.nativeEvent.stopImmediatePropagation();
       if (!isOpened) {
         setOpenedAdditional([...openedAdditional, id]);
       }
@@ -60,35 +59,33 @@ export const DropDownItem: FC<IProps> = ({
       </div>
       <div className={cn('dropDownItemAdditionalWrapper')}>
         {additionalItems &&
-          additionalItems.map(({ id: uid, name }) => {
-            return (
-              <React.Fragment>
-                {isOpened && (
-                  <div
-                    key={uid}
-                    className={cn('dropDownItem')}
-                    onClick={() => handleAdditionalClick(uid)}
+          additionalItems.map(({ id: uid, name }) => (
+            <React.Fragment>
+              {isOpened && (
+                <div
+                  key={uid}
+                  className={cn('dropDownItem')}
+                  onClick={() => handleAdditionalClick(uid)}
+                >
+                  <img
+                    alt=""
+                    className={cn('dropDownItemImage', {
+                      dropDownItemImageSelected: checked,
+                    })}
+                    src={iconSrc}
+                  />
+                  <p
+                    className={cn(
+                      'dropDownItemText',
+                      'dropDownItemTextAdditional'
+                    )}
                   >
-                    <img
-                      alt=""
-                      className={cn('dropDownItemImage', {
-                        dropDownItemImageSelected: checked,
-                      })}
-                      src={iconSrc}
-                    />
-                    <p
-                      className={cn(
-                        'dropDownItemText',
-                        'dropDownItemTextAdditional'
-                      )}
-                    >
-                      {name}
-                    </p>
-                  </div>
-                )}
-              </React.Fragment>
-            );
-          })}
+                    {name}
+                  </p>
+                </div>
+              )}
+            </React.Fragment>
+          ))}
       </div>
     </div>
   );

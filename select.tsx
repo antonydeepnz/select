@@ -16,7 +16,7 @@ type TValue<T> = T | T[];
 interface IProp {
   caption?: string;
   value: TValue<string> | null;
-  white?: boolean;
+  transparent?: boolean;
   options: any[];
   popularOptions?: any[];
   clearAll: boolean;
@@ -28,7 +28,7 @@ interface IProp {
 export const Select: FC<IProp> = ({
   caption = '',
   value,
-  white = false,
+  transparent = false,
   popularOptions,
   options,
   showSelected = false,
@@ -89,14 +89,18 @@ export const Select: FC<IProp> = ({
   return (
     <div className={cn('selectWrapper')}>
       <div
-        className={cn('selectInputWrapper', {
-          selectInputWrapperActive: showDropDown,
-        })}
+        className={cn(
+          'selectInputWrapper',
+          { selectInputWrapperTransparent: transparent },
+          {
+            selectInputWrapperActive: showDropDown,
+          }
+        )}
       >
         <input
           ref={inputRef}
           type="text"
-          className={cn('selectInput', { selectInputWhite: white })}
+          className={cn('selectInput')}
           value={displaiedValue}
           onClick={handleInputClick}
           onFocus={handleInputClick}

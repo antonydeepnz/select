@@ -12,6 +12,10 @@
   background-color: rgba(11, 31, 53, 0.05);
 }
 
+.selectInputWrapperTransparent {
+  background-color: transparent;
+}
+
 .selectInputWrapperActive {
   border-bottom: 2px solid #0b1f35;
 }
@@ -20,15 +24,15 @@
   position: absolute;
   bottom: 7px;
   left: 12px;
-  /* height: 20px; */
+  height: 100%;
   width: 100%;
   outline: none;
   border: none;
   background-color: transparent;
 }
 
-.selectInputWhite {
-  background-color: #fff;
+.selectInput:focus {
+  height: 20px;
 }
 
 .selectCaption {
