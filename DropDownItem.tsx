@@ -27,7 +27,8 @@ export const DropDownItem: FC<IProps> = ({
 
   const handleAdditionalClick =
     (id: string) => (event: React.MouseEvent<HTMLElement>) => {
-      // event.stopPropaganation();
+      event.stopPropagation();
+      event.nativeEvent.stopImmediatePropagation();
       if (!isOpened) {
         setOpenedAdditional([...openedAdditional, id]);
       }
