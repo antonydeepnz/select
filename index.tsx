@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Select } from './Hello';
+import { Select } from './select';
 import './style.css';
 
 interface AppProps {}
@@ -19,8 +19,7 @@ class App extends Component<AppProps, AppState> {
   render() {
     return (
       <div>
-        <Hello name={this.state.name} />
-        <p>Start editing to see some magic happen :)</p>
+        <Select />
       </div>
     );
   }
