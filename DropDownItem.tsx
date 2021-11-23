@@ -1,29 +1,48 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import cn from 'classnames';
 
 interface IProps {
-  id?: string;
+  additionalItems?: any[];
   iconSrc?: string;
-  selected?: boolean;
+  showIcon: boolean;
   iconMode?: 'display' | 'selected';
   text: string;
   onClick?: () => void;
 }
 
 export const DropDownItem: FC<IProps> = ({
-  id,
+  additionalItems,
   iconSrc = 'https://storage.yandexcloud.net/alfaleasing/components/dropdown-selected.svg',
-  selected = false,
+  showIcon,
   text,
   onClick = () => {},
 }) => {
   return (
-    <div
-      className={cn('dropDownItem', { dropDownItemSelected: selected })}
-      onClick={onClick}
-    >
-      <img alt="" className={cn('dropDownItemImage')} src={iconSrc} />
+    <div className={cn('dropDownItem')} onClick={onClick}>
+      <img
+        alt=""
+        className={cn('dropDownItemImage', {
+          dropDownItemImageSelected: showIcon,
+        })}
+        src={iconSrc}
+      />
       <p className={cn('dropDownItemText')}>{text}</p>
+      {additionalItems && (
+        <img alt="" className={cn('dropDownItemImageAdditional')} />
+      )}
+      {additionalItems &&
+        additionalItems.map(({ id, name }) => (
+          <div>
+            <img
+              alt=""
+              className={cn('dropDownItemImage', {
+                dropDownItemImageSelected: showIcon,
+              })}
+              src={iconSrc}
+            />
+            <p className={cn('dropDownItemText')}>{text}</p>
+          </div>
+        ))}
     </div>
   );
 };

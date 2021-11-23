@@ -113,7 +113,7 @@
   visibility: hidden;
 }
 
-.dropDownItemSelected + .dropDownItemImage {
+.dropDownItemImageSelected {
   visibility: visible;
 }
 
@@ -121,4 +121,13 @@
   font-size: 16px;
   line-height: 22px;
   color: #0b1f35;
+}
+
+.dropDownItemImageAdditional {
+  height: 24px;
+  width: 24px;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url('https://storage.yandexcloud.net/alfaleasing/components/plus-icon.svg');
 }

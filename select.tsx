@@ -119,7 +119,7 @@ export const Select: FC<IProp> = ({
         {onClear && (
           <DropDownItem
             iconSrc="https://storage.yandexcloud.net/alfaleasing/components/cross-icon.svg"
-            selected={true}
+            showIcon
             text="Любая"
           />
         )}
@@ -128,6 +128,7 @@ export const Select: FC<IProp> = ({
             groupTitle="Выбранные"
             items={selectedItems}
             onItemClick={handleSelectItem}
+            selected={selectedItems}
           />
         )}
         {popularOptions && (
@@ -136,6 +137,7 @@ export const Select: FC<IProp> = ({
             items={popularOptions}
             bottomBorder={true}
             onItemClick={handleSelectItem}
+            selected={selectedItems}
           />
         )}
         <DropDownGroup
@@ -143,6 +145,7 @@ export const Select: FC<IProp> = ({
           items={options}
           bottomBorder={true}
           onItemClick={handleSelectItem}
+          selected={selectedItems}
         />
       </div>
     </div>

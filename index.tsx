@@ -8,8 +8,18 @@ interface AppState {
   name: string;
 }
 
+// https://storage.yandexcloud.net/alfaleasing/components/plus-icon.svg
+
 const arr = [
-  { id: '3', name: '3 series' },
+  {
+    id: '3',
+    name: '3 series',
+    items: [
+      { id: '315', name: '315' },
+      { id: '318', name: '318' },
+      { id: '320', name: '320' },
+    ],
+  },
   { id: '4', name: '4 series' },
   { id: '5', name: '5 series' },
   { id: '6', name: '6 series' },
