@@ -3,12 +3,14 @@ import cn from 'classnames';
 
 import { DropDownItem } from './DropDownItem';
 
+type TItem = { id?: string; name: string };
+
 interface IProp {
   groupTitle?: string;
   items: any[];
   bottomBorder?: boolean;
   selected: any[];
-  onItemClick: () => void;
+  onItemClick: (item: TItem) => void;
 }
 
 export const DropDownGroup: FC<IProp> = ({
