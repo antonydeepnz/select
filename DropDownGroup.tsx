@@ -8,8 +8,7 @@ interface IProp {
   items: any[];
   bottomBorder?: boolean;
   selected: any[];
-  // onItemClick: ({ id, name }) => () => void;
-  onItemClick: any;
+  onItemClick: () => void;
 }
 
 export const DropDownGroup: FC<IProp> = ({

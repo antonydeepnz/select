@@ -89,8 +89,6 @@ export const Select: FC<IProp> = ({
     [selectedItems]
   );
 
-  console.log(selectedItems);
-
   return (
     <div className={cn('selectWrapper')}>
       <div

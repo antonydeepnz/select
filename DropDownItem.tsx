@@ -10,8 +10,7 @@ interface IProps {
   showIcon?: boolean;
   checked?: boolean;
   iconMode?: 'display' | 'selected';
-  // onItemSelect?: () => void;
-  onItemSelect?: any;
+  onItemSelect?: (item: TItem) => void;
 }
 
 export const DropDownItem: FC<IProps> = ({
