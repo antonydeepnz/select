@@ -13,11 +13,20 @@ import { DropDownItem } from './DropDownItem';
 
 type TValue<T> = T | T[];
 
+interface IOption {
+  id: string;
+  name: string;
+}
+
+interface IOptions extends IOption {
+  items?: IOption[];
+}
+
 interface IProp {
   caption?: string;
   value: TValue<string> | null;
   transparent?: boolean;
-  options: any[];
+  options: IOptions[];
   popularOptions?: any[];
   clearAll: boolean;
   showSelected?: boolean;
@@ -38,7 +47,6 @@ export const Select: FC<IProp> = ({
   groupSeparators = false,
   onChange,
 }) => {
-  const [renders, setRenders] = useState<number>(0);
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState([]);
 
