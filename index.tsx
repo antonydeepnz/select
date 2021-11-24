@@ -49,6 +49,7 @@ const App = () => {
         options={arr}
         showSelected
         popularOptions={popular}
+        transparent
         clearAll
         groupSeparators
         onChange={setValue}
