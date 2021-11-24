@@ -1,29 +1,30 @@
 import React, { FC, useState } from 'react';
 import cn from 'classnames';
 
+type TItem = { id?: string; name: string };
+
 interface IProps {
   additionalItems?: any[];
-  id?: string;
+  item: TItem;
   iconSrc?: string;
   showIcon?: boolean;
   checked?: boolean;
   iconMode?: 'display' | 'selected';
-  text: string;
-  onClick?: () => void;
+  // onItemSelect?: () => void;
+  onItemSelect?: any;
 }
 
 export const DropDownItem: FC<IProps> = ({
   additionalItems,
-  id,
+  item,
   iconSrc = 'https://storage.yandexcloud.net/alfaleasing/components/dropdown-selected.svg',
   checked,
-  text,
   showIcon,
-  onClick = () => {},
+  onItemSelect = () => {},
 }) => {
   const [openedAdditional, setOpenedAdditional] = useState<string[]>([]);
 
-  const isOpened = openedAdditional.includes(id);
+  const isOpened = openedAdditional.includes(item?.id);
 
   const handleAdditionalClick =
     (id: string) => (event: React.MouseEvent<HTMLElement>) => {
@@ -39,7 +40,7 @@ export const DropDownItem: FC<IProps> = ({
 
   return (
     <div className={cn('dropDownItemWrapper')}>
-      <div className={cn('dropDownItem')} onClick={onClick}>
+      <div className={cn('dropDownItem')} onClick={() => onItemSelect(item)}>
         <img
           alt=""
           className={cn('dropDownItemImage', {
@@ -47,13 +48,13 @@ export const DropDownItem: FC<IProps> = ({
           })}
           src={iconSrc}
         />
-        <p className={cn('dropDownItemText')}>{text}</p>
+        <p className={cn('dropDownItemText')}>{item?.name}</p>
         {additionalItems && (
           <button
             className={cn('dropDownItemAdditionalButton', {
               dropDownItemAdditionalButtonActive: isOpened,
             })}
-            onClick={handleAdditionalClick(id)}
+            onClick={handleAdditionalClick(item.id)}
           />
         )}
       </div>
@@ -65,7 +66,7 @@ export const DropDownItem: FC<IProps> = ({
                 <div
                   key={uid}
                   className={cn('dropDownItem')}
-                  onClick={() => handleAdditionalClick(uid)}
+                  onClick={() => onItemSelect({ id: uid, name })}
                 >
                   <img
                     alt=""

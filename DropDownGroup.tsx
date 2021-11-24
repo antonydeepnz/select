@@ -8,7 +8,8 @@ interface IProp {
   items: any[];
   bottomBorder?: boolean;
   selected: any[];
-  onItemClick: ({ id, name }) => () => void;
+  // onItemClick: ({ id, name }) => () => void;
+  onItemClick: any;
 }
 
 export const DropDownGroup: FC<IProp> = ({
@@ -24,11 +25,10 @@ export const DropDownGroup: FC<IProp> = ({
         items.map(({ id, name, items }) => (
           <DropDownItem
             key={id}
-            id={id}
+            item={{ id, name }}
             additionalItems={items}
             checked={selected.some(({ id: uid }) => uid === id)}
-            text={name}
-            onClick={onItemClick({ id, name })}
+            onItemSelect={onItemClick}
           />
         ))}
     </div>

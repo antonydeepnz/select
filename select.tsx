@@ -64,16 +64,15 @@ export const Select: FC<IProp> = ({
   };
 
   const handleSelectItem = useCallback(
-    ({ id, name }) =>
-      (): void => {
-        if (!selectedItems.some(({ id: uid }) => uid === id)) {
-          setSelectedItems([...selectedItems, { id, name }]);
-        } else {
-          setSelectedItems([
-            ...selectedItems.filter(({ id: key }) => id !== key),
-          ]);
-        }
-      },
+    ({ id, name }) => {
+      if (!selectedItems.some(({ id: uid }) => uid === id)) {
+        setSelectedItems([...selectedItems, { id, name }]);
+      } else {
+        setSelectedItems([
+          ...selectedItems.filter(({ id: key }) => id !== key),
+        ]);
+      }
+    },
     [selectedItems]
   );
 
@@ -89,6 +88,8 @@ export const Select: FC<IProp> = ({
         .join(', '),
     [selectedItems]
   );
+
+  console.log(selectedItems);
 
   return (
     <div className={cn('selectWrapper')}>
@@ -140,8 +141,8 @@ export const Select: FC<IProp> = ({
           <DropDownItem
             iconSrc="https://storage.yandexcloud.net/alfaleasing/components/cross-icon.svg"
             showIcon
-            text="Любая"
-            onClick={handleClearAll}
+            item={{ name: 'Любая' }}
+            onItemSelect={handleClearAll}
           />
         )}
         {showSelected && selectedItems.length > 0 && (
