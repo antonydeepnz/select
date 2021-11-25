@@ -49,7 +49,7 @@ export const Select: FC<IProp> = ({
 }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [autocomplete, setAutocomplete] = useState();
+  const [autocomplete, setAutocomplete] = useState<string>('');
 
   const inputRef = useRef<HTMLInputElement>(null);
 
