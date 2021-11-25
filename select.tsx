@@ -27,7 +27,7 @@ interface IProp {
   value: TValue<string> | null;
   transparent?: boolean;
   options: IOptions[];
-  popularOptions?: any[];
+  popularOptions?: IOptions[];
   clearAll: boolean;
   showSelected?: boolean;
   mainGroupTitle?: string;
@@ -49,6 +49,7 @@ export const Select: FC<IProp> = ({
 }) => {
   const [showDropDown, setShowDropDown] = useState<boolean>(false);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [autocomplete, setAutocomplete] = useState();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -57,7 +58,10 @@ export const Select: FC<IProp> = ({
   //   onChange(selectedItems);
   // }, [selectedItems]);
 
-  const handleInputClick = (): void => {
+  const handleInputClick = (
+    event: React.MouseEvent<HTMLInputElement>
+  ): void => {
+    event.preventDefault();
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -68,7 +72,22 @@ export const Select: FC<IProp> = ({
     if (inputRef.current) {
       inputRef.current.blur();
     }
-    // setShowDropDown(false);
+    setShowDropDown(false);
+  };
+
+  const handleArrowClick = (): void => {
+    setShowDropDown((prev) => !prev);
+    if (showDropDown) {
+      if (inputRef.current) {
+        inputRef.current.blur();
+      }
+    }
+
+    if (!!showDropDown) {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }
   };
 
   const handleSelectItem = useCallback(
@@ -97,6 +116,8 @@ export const Select: FC<IProp> = ({
     [selectedItems]
   );
 
+  console.log(value);
+
   return (
     <div className={cn('selectWrapper')}>
       <div
@@ -108,6 +129,7 @@ export const Select: FC<IProp> = ({
           }
         )}
       >
+        <input type="hidden" value={value} />
         <input
           ref={inputRef}
           type="text"
@@ -126,12 +148,11 @@ export const Select: FC<IProp> = ({
         >
           {caption}
         </p>
-        <img
-          alt=""
+        <button
           className={cn('selectArrow', {
             selectArrowActive: showDropDown,
           })}
-          src="https://storage.yandexcloud.net/alfaleasing/components/dropdown-arrow.svg"
+          onClick={handleArrowClick}
         />
       </div>
       <div

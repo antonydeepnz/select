@@ -45,7 +45,7 @@ const App = () => {
     <div>
       <Select
         caption="Марка"
-        value={null}
+        value={value}
         options={arr}
         showSelected
         popularOptions={popular}
